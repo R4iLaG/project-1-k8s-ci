@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-1-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project-1
+  template:
+    metadata:
+      labels:
+        app: project-1
+    spec:
+      containers:
+      - name: app
+        image: project-1-k8s-ci-app:latest
+        imagePullPolicy: Never          # ← критично! берём локальный образ
+        ports:
+        - containerPort: 8000
